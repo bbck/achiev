@@ -1,4 +1,4 @@
 Achiev::Application.routes.draw do
 
-  root :to => "pages#home"
+  root :to => "pages#index"
 end
