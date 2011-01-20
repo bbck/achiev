@@ -1,6 +1,15 @@
+GIT
+  remote: git://github.com/bbck/armory.git
+  revision: e2994232b19bdd688db88df08b35927befa8a6fe
+  specs:
+    armory (0.1.0)
+      nokogiri (~> 1.4.3)
+      typhoeus (~> 0.2.0)
+
 GEM
   remote: http://rubygems.org/
   specs:
+    SystemTimer (1.2.1)
     abstract (1.0.0)
     actionmailer (3.0.3)
       actionpack (= 3.0.3)
@@ -28,12 +37,13 @@ GEM
       activemodel (= 3.0.3)
       activesupport (= 3.0.3)
     activesupport (3.0.3)
-    arel (2.0.6)
+    arel (2.0.7)
     builder (2.1.2)
     diff-lcs (1.1.2)
     erubis (2.6.6)
       abstract (>= 1.0.0)
     i18n (0.5.0)
+    json (1.4.6)
     mail (2.2.14)
       activesupport (>= 2.3.6)
       i18n (>= 0.4.0)
@@ -62,6 +72,14 @@ GEM
       rake (>= 0.8.7)
       thor (~> 0.14.4)
     rake (0.8.7)
+    redis (2.1.1)
+    redis-namespace (0.8.0)
+      redis (< 3.0.0)
+    resque (1.10.0)
+      json (~> 1.4.6)
+      redis-namespace (~> 0.8.0)
+      sinatra (>= 0.9.2)
+      vegas (~> 0.1.2)
     rspec (2.4.0)
       rspec-core (~> 2.4.0)
       rspec-expectations (~> 2.4.0)
@@ -75,10 +93,17 @@ GEM
       activesupport (~> 3.0)
       railties (~> 3.0)
       rspec (~> 2.4.0)
+    sinatra (1.1.2)
+      rack (~> 1.1)
+      tilt (~> 1.2)
     thor (0.14.6)
+    tilt (1.2.2)
     treetop (1.4.9)
       polyglot (>= 0.3.1)
-    tzinfo (0.3.23)
+    typhoeus (0.2.0)
+    tzinfo (0.3.24)
+    vegas (0.1.8)
+      rack (>= 1.0.0)
     webrat (0.7.3)
       nokogiri (>= 1.2.0)
       rack (>= 1.0)
@@ -88,8 +113,11 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  SystemTimer (~> 1.2.1)
+  armory!
   mysql2 (~> 0.2.6)
   rails (= 3.0.3)
+  resque (~> 1.10.0)
   rspec (~> 2.4.0)
   rspec-rails (~> 2.4.1)
   webrat (~> 0.7.3)
