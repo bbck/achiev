@@ -90,5 +90,6 @@ PLATFORMS
 DEPENDENCIES
   mysql2 (~> 0.2.6)
   rails (= 3.0.3)
-  rspec-rails (~> 2.4)
+  rspec (~> 2.4.0)
+  rspec-rails (~> 2.4.1)
   webrat (~> 0.7.3)
