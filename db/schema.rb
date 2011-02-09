@@ -10,14 +10,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110120021229) do
+ActiveRecord::Schema.define(:version => 20110209023216) do
 
   create_table "characters", :force => true do |t|
     t.string   "region",             :limit => 2
     t.string   "realm"
     t.string   "name",               :limit => 12
     t.string   "battlegroup"
-    t.string   "guild",              :limit => 24
+    t.integer  "guild_id"
     t.integer  "achievement_points"
     t.integer  "level"
     t.integer  "title_id"
@@ -30,5 +30,19 @@ ActiveRecord::Schema.define(:version => 20110120021229) do
   end
 
   add_index "characters", ["region", "realm", "name"], :name => "index_characters_on_region_and_realm_and_name", :unique => true
+
+  create_table "guilds", :force => true do |t|
+    t.string   "region",             :limit => 2
+    t.string   "realm"
+    t.string   "name",               :limit => 24
+    t.string   "battlegroup"
+    t.integer  "level"
+    t.integer  "achievement_points"
+    t.integer  "faction_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "guilds", ["region", "realm", "name"], :name => "index_guilds_on_region_and_realm_and_name", :unique => true
 
 end
