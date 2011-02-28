@@ -1,13 +1,12 @@
 source 'http://rubygems.org'
 
-gem 'rails',                '3.0.4'
+gem 'rails',                '3.0.5'
 gem 'mysql2',               '~> 0.2.6'
 gem 'armory',               :git => 'git://github.com/bbck/armory.git'
 gem 'resque',               '~> 1.13.0'
 gem 'resque-status',        '~> 0.2.1'
 gem 'SystemTimer',          '~> 1.2.2'
 gem 'hoptoad_notifier',     '~> 2.4.2'
-gem 'heroku',               '~> 1.17.10'
 gem 'jquery-rails',         '~> 0.2.7'
 
 group :test, :development do
