@@ -8,6 +8,8 @@ gem 'resque-status',        '~> 0.2.1'
 gem 'SystemTimer',          '~> 1.2.2'
 gem 'hoptoad_notifier',     '~> 2.4.2'
 gem 'jquery-rails',         '~> 0.2.7'
+gem 'omniauth',             '~> 0.2.0'
+gem 'devise',               '~> 1.2.rc2'
 
 group :test, :development do
   gem 'rspec-rails',        '~> 2.5.0'

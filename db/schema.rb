@@ -10,12 +10,12 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110209023216) do
+ActiveRecord::Schema.define(:version => 20110316060828) do
 
   create_table "characters", :force => true do |t|
-    t.string   "region",             :limit => 2
-    t.string   "realm"
-    t.string   "name",               :limit => 12
+    t.string   "region",             :limit => 2,  :null => false
+    t.string   "realm",                            :null => false
+    t.string   "name",               :limit => 12, :null => false
     t.string   "battlegroup"
     t.integer  "guild_id"
     t.integer  "achievement_points"
@@ -32,9 +32,9 @@ ActiveRecord::Schema.define(:version => 20110209023216) do
   add_index "characters", ["region", "realm", "name"], :name => "index_characters_on_region_and_realm_and_name", :unique => true
 
   create_table "guilds", :force => true do |t|
-    t.string   "region",             :limit => 2
-    t.string   "realm"
-    t.string   "name",               :limit => 24
+    t.string   "region",             :limit => 2,  :null => false
+    t.string   "realm",                            :null => false
+    t.string   "name",               :limit => 24, :null => false
     t.string   "battlegroup"
     t.integer  "level"
     t.integer  "achievement_points"
@@ -44,5 +44,23 @@ ActiveRecord::Schema.define(:version => 20110209023216) do
   end
 
   add_index "guilds", ["region", "realm", "name"], :name => "index_guilds_on_region_and_realm_and_name", :unique => true
+
+  create_table "users", :force => true do |t|
+    t.string   "email",                               :default => "",    :null => false
+    t.string   "encrypted_password",   :limit => 128, :default => "",    :null => false
+    t.string   "reset_password_token"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",                       :default => 0
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
+    t.boolean  "admin",                               :default => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "users", ["email"], :name => "index_users_on_email", :unique => true
+  add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
 
 end
