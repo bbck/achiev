@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails',                '3.0.5'
+gem 'rails',                '3.0.6'
 gem 'mysql2',               '~> 0.2.6'
 gem 'armory',               :git => 'git://github.com/bbck/armory.git'
 gem 'resque',               '~> 1.13.0'
