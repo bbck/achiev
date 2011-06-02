@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110228212635) do
+ActiveRecord::Schema.define(:version => 20110602031732) do
 
   create_table "characters", :force => true do |t|
     t.string   "region",             :limit => 2,  :null => false
@@ -27,6 +27,7 @@ ActiveRecord::Schema.define(:version => 20110228212635) do
     t.integer  "gender_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.datetime "fetched_at"
   end
 
   add_index "characters", ["region", "realm", "name"], :name => "index_characters_on_region_and_realm_and_name", :unique => true
@@ -41,6 +42,7 @@ ActiveRecord::Schema.define(:version => 20110228212635) do
     t.integer  "faction_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.datetime "fetched_at"
   end
 
   add_index "guilds", ["region", "realm", "name"], :name => "index_guilds_on_region_and_realm_and_name", :unique => true

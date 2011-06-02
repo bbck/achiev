@@ -18,7 +18,7 @@ class CharacterJob
     character = Character.find_by_region_and_realm_and_name(region, realm, name)
     character ||= Character.new
     
-    return unless character.updated_at == nil || self.stale?(character.updated_at)
+    return unless character.fetched_at == nil || self.stale?(character.updated_at)
     
     # Basic info
     armory = self.character_from_armory(region, realm, name)
@@ -29,6 +29,7 @@ class CharacterJob
     
     # We need to set the region by hand
     character.region = region
+    character.fetched_at = Time.now
     
     ATTRIBUTES.each do |key, value|
       character[key] = armory.instance_variable_get("@#{value}")
@@ -42,7 +43,6 @@ class CharacterJob
         guild.region      = region
         guild.realm       = armory.realm
         guild.name        = armory.guild
-        guild.battlegroup = armory.battle_group
         guild.faction_id  = armory.faction_id
         guild.save
         Resque.enqueue(GuildJob, region, realm, armory.guild)
