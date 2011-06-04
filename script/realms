@@ -1,0 +1,16 @@
+#!/usr/bin/env ruby
+require File.expand_path('../../config/environment',  __FILE__)
+
+REGIONS = [:us, :eu, :kr]
+realms = {}
+
+REGIONS.each do |region|
+  Battlenet::API.set_option(:region, region)
+  realms[region] = []
+  
+  Battlenet::API::Realm.status.each do |realm|
+    realms[region] << realm["name"]
+  end
+end
+
+File.open("#{RAILS_ROOT}/config/realms.yml", "w") { |out| YAML.dump(realms, out) }
