@@ -1,7 +1,7 @@
 <tr>
   <td><%= character.name %></td>
   <td><%= character.realm %></td>
-  <td><%= character.guild.name %></td>
+  <td><%= character.guild.name if character.guild  %></td>
   <td><%= character.faction_id == 1 ? 'Horde' : 'Alliance' %></td>
   <td><%= character.achievement_points %></td>
   <td><%= time_ago_in_words character.fetched_at %> </td>
