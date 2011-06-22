@@ -12,6 +12,7 @@ gem 'resque'
 gem 'hoptoad_notifier'
 gem 'unicorn'
 gem 'capistrano'
+gem 'kaminari'
 
 group :test, :development do
   gem 'rspec-rails'
