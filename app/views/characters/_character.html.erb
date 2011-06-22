@@ -1,4 +1,6 @@
+<% page ||= 1 %>
 <tr>
+  <td><%= character_counter + 1 + ((page.to_i - 1) * 100)%></td>
   <td><%= character.name %></td>
   <td><%= character.realm %></td>
   <td><%= character.guild.name if character.guild  %></td>

@@ -1,6 +1,7 @@
 <%= paginate @characters %>
 <table>
   <tr>
+    <th>#</th>
     <th>Name</th>
     <th>Realm</th>
     <th>Guild</th>
@@ -8,6 +9,6 @@
     <th>Points</th>
     <th>Updated</th>
   </tr>
-  <%= render @characters %>
+  <%= render @characters, :page => params[:page] %>
 </table>
 <%= paginate @characters %>
