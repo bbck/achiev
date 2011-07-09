@@ -17,7 +17,7 @@ class GuildJob
     guild.save
     
     armory.characters.each do |character|
-      Resque.enqueue(CharacterJob, "us", realm, character.name) unless character.level < 10
+      Resque.enqueue(CharacterJob, "us", realm, character.name) unless character.level < 60
     end
     
     sleep 2
