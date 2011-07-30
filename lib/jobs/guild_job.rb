@@ -5,21 +5,27 @@ class GuildJob
     guild = Guild.find_by_region_and_realm_and_name(region, realm, name)
     guild ||= Guild.new
     
-    armory = Armory.guild_info(region, realm, name)
+    armory = self.from_armory(region, realm, name)
     
-    # We need to set the region by hand
-    guild.region      = region
-    guild.realm       = armory.realm
-    guild.name        = armory.name
-    guild.faction_id  = armory.faction_id
-    guild.fetched_at  = Time.now
+    guild.region = region
+    guild.fetched_at = Time.now
+    guild.name = armory.name
+    guild.realm = armory.realm
+    guild.faction_id = armory.side
+    guild.level = armory.level
+    guild.achievement_points = armory.achievementPoints
     
     guild.save
     
-    armory.characters.each do |character|
-      Resque.enqueue(CharacterJob, "us", realm, character.name) unless character.level < 60
+    armory.members.each do |member|
+      Resque.enqueue(CharacterJob, region, realm, member.character.name)
     end
     
     sleep 2
+  end
+  
+  def self.from_armory(region, realm, name)
+    WowCommunityApi::BattleNet.region = WowCommunityApi::Regions::const_get(region.upcase)
+    WowCommunityApi::Guild.find_by_realm_and_name(realm, name, :members)
   end
 end

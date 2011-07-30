@@ -1,50 +1,39 @@
 class CharacterJob
   @queue = :character
   
-  ATTRIBUTES = {
-    :realm => "realm",
-    :name => "name",
-    :battlegroup => "battle_group",
-    :achievement_points => "points",
-    :level => "level",
-    :title_id => "title_id",
-    :faction_id => "faction_id",
-    :race_id => "race_id",
-    :class_id => "class_id",
-    :gender_id => "gender_id",
-  }
-  
   def self.perform(region, realm, name)
     character = Character.find_by_region_and_realm_and_name(region, realm, name)
     character ||= Character.new
     
-    return unless character.fetched_at == nil || self.stale?(character.updated_at)
+    return unless character.fetched_at == nil || self.needs_update?(character.fetched_at)
     
     # Basic info
-    armory = self.character_from_armory(region, realm, name)
-    if armory == nil
-      character.destroy
-      return
-    end
+    armory = self.from_armory(region, realm, name)
     
-    # We need to set the region by hand
     character.region = region
     character.fetched_at = Time.now
-    
-    ATTRIBUTES.each do |key, value|
-      character[key] = armory.instance_variable_get("@#{value}")
-    end
+    character.name = armory.name
+    character.realm = armory.realm
+    character.race_id = armory.race
+    character.class_id = armory.class_id
+    character.gender_id = armory.gender
+    character.faction_id = self.faction_id(armory.race)
+    character.level = armory.level
+    character.achievement_points = armory.achievementPoints
     
     # Guild
-    if !armory.guild.blank?
-      guild = Guild.find_by_region_and_realm_and_name(region, realm, armory.guild)
+    unless armory.guild.blank?
+      guild = Guild.find_by_region_and_realm_and_name(region, realm, armory.guild.name)
       guild ||= Guild.new
       if guild.id.nil?
         guild.region      = region
         guild.realm       = armory.realm
-        guild.name        = armory.guild
-        guild.faction_id  = armory.faction_id
+        guild.name        = armory.guild.name
+        guild.faction_id  = self.faction_id(armory.race)
+        guild.level       = armory.guild.level
+        guild.achievement_points = armory.guild.achievementPoints
         guild.save
+        
         Resque.enqueue(GuildJob, region, realm, armory.guild)
       end
       character.guild = guild
@@ -54,35 +43,19 @@ class CharacterJob
     
     character.save
     
-    # Find any new characters in arena teams
-    members = []
-    armory.arena_teams.each do |team|
-      team.members.each do |member|
-        members << member.name unless member.name == armory.name || members.include?(member.name)
-      end
-    end
-    if members.size > 0
-      known = Character.find_all_by_region_and_realm_and_name(region, realm, members)
-      known.each do |character|
-        members.delete(character.name)
-      end
-      members.each do |member|
-        Resque.enqueue(CharacterJob, region, realm, member)
-      end
-    end
-    
     sleep 2
   end
   
-  def self.character_from_armory(region, realm, name)
-    begin
-      armory = Armory.character_sheet(region, realm, name)
-    rescue Armory::NotFound
-      return nil
-    end
+  def self.from_armory(region, realm, name)
+    WowCommunityApi::BattleNet.region = WowCommunityApi::Regions::const_get(region.upcase)
+    WowCommunityApi::Character.find_by_realm_and_name(realm, name, :guild)
   end
   
-  def self.stale?(timestamp)
+  def self.needs_update?(timestamp)
     timestamp < 3.days.ago
+  end
+  
+  def self.faction_id(race)
+    [1,3,4,7,11,22].include?(race) ? 0 : 1
   end
 end
