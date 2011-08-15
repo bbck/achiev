@@ -12,6 +12,7 @@ gem 'hoptoad_notifier'
 gem 'unicorn'
 gem 'capistrano'
 gem 'kaminari'
+gem 'blueprint-rails'
 
 group :test, :development do
   gem 'rspec-rails'
