@@ -34,7 +34,7 @@ class CharacterJob
         guild.achievement_points = armory.guild.achievementPoints
         guild.save
         
-        Resque.enqueue(GuildJob, region, realm, armory.guild)
+        Resque.enqueue(GuildJob, region, realm, armory.guild.name)
       end
       character.guild = guild
     else
