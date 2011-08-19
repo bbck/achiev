@@ -15,15 +15,13 @@ class GuildJob
     guild.level = armory.level
     guild.achievement_points = armory.achievementPoints
     
-    guild.save
-    
     armory.members.each do |member|
       if member.character.level > 10 then
         Resque.enqueue(CharacterJob, region, realm, member.character.name)
       end
     end
     
-    sleep 2
+    guild.save
   end
   
   def self.from_armory(region, realm, name)

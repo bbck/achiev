@@ -42,13 +42,11 @@ class CharacterJob
     end
     
     character.save
-    
-    sleep 2
   end
   
   def self.from_armory(region, realm, name)
     WowCommunityApi::BattleNet.region = WowCommunityApi::Regions::const_get(region.upcase)
-    WowCommunityApi::Character.find_by_realm_and_name(realm, name, :guild)
+    WowCommunityApi::Character.find_by_realm_and_name(realm, name, :guild, :pvp)
   end
   
   def self.needs_update?(timestamp)
