@@ -1,21 +1,26 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Achiev</title>
+  <title>WoW Achievement Rankings</title>
+  <link rel="stylesheet" href="http://twitter.github.com/bootstrap/assets/css/bootstrap-1.1.0.min.css">
   <%= stylesheet_link_tag    "application" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <div class="container">
-    <header class="span-24 last">
-
-    </header>
-    <div class="span-16">
-      <%= yield %>
+  <div class="topbar">
+    <div class="fill">
+      <div class="container fixed">
+        <h3><%= link_to "WoW Achievement Rankings", root_url %></h3>
+      </div>
     </div>
-    <div class="span-8 last">
-      
+  </div>
+  <div class="content">
+    <div class="container">
+      <%= yield %>
+      <footer>
+        <p>&copy; 2011</p>
+      </footer>
     </div>
   </div>
 </body>

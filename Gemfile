@@ -11,7 +11,6 @@ gem 'resque'
 gem 'unicorn'
 gem 'capistrano'
 gem 'kaminari'
-gem 'twitter-bootstrap-rails'
 
 group :test, :development do
   gem 'rspec-rails'
