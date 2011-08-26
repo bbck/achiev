@@ -12,29 +12,29 @@ class CharacterJob
     
     character.region = region
     character.fetched_at = Time.now
-    character.name = armory.name
-    character.realm = armory.realm
-    character.race_id = armory.race
-    character.class_id = armory.class_id
-    character.gender_id = armory.gender
-    character.faction_id = self.faction_id(armory.race)
-    character.level = armory.level
-    character.achievement_points = armory.achievementPoints
+    character.name = armory["name"]
+    character.realm = armory["realm"]
+    character.race_id = armory["race"]
+    character.class_id = armory["class"]
+    character.gender_id = armory["gender"]
+    character.faction_id = self.faction_id(armory["race"])
+    character.level = armory["level"]
+    character.achievement_points = armory["achievementPoints"]
     
     # Guild
-    unless armory.guild.blank?
-      guild = Guild.find_by_region_and_realm_and_name(region, realm, armory.guild.name)
+    unless armory["guild"].blank?
+      guild = Guild.find_by_region_and_realm_and_name(region, realm, armory["guild"]["name"])
       guild ||= Guild.new
       if guild.id.nil?
         guild.region      = region
-        guild.realm       = armory.realm
-        guild.name        = armory.guild.name
-        guild.faction_id  = self.faction_id(armory.race)
-        guild.level       = armory.guild.level
-        guild.achievement_points = armory.guild.achievementPoints
+        guild.realm       = armory["realm"]
+        guild.name        = armory["guild"]["name"]
+        guild.faction_id  = self.faction_id(armory["race"])
+        guild.level       = armory["guild"]["level"]
+        guild.achievement_points = armory["guild"]["achievementPoints"]
         guild.save
         
-        Resque.enqueue(GuildJob, region, realm, armory.guild.name)
+        Resque.enqueue(GuildJob, region, realm, armory["guild"]["name"])
       end
       character.guild = guild
     else
@@ -45,8 +45,8 @@ class CharacterJob
   end
   
   def self.from_armory(region, realm, name)
-    WowCommunityApi::BattleNet.region = WowCommunityApi::Regions::const_get(region.upcase)
-    WowCommunityApi::Character.find_by_realm_and_name(realm, name, :guild, :pvp)
+    Battlenet::API.set_option(:region, region.downcase.to_sym)
+    Battlenet::API::Character.profile(name, realm, ["guild"])
   end
   
   def self.needs_update?(timestamp)

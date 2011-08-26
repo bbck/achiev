@@ -9,15 +9,15 @@ class GuildJob
     
     guild.region = region
     guild.fetched_at = Time.now
-    guild.name = armory.name
-    guild.realm = armory.realm
-    guild.faction_id = armory.side
-    guild.level = armory.level
-    guild.achievement_points = armory.achievementPoints
+    guild.name = armory["name"]
+    guild.realm = armory["realm"]
+    guild.faction_id = armory["side"]
+    guild.level = armory["level"]
+    guild.achievement_points = armory["achievementPoints"]
     
-    armory.members.each do |member|
-      if member.character.level > 10 then
-        Resque.enqueue(CharacterJob, region, realm, member.character.name)
+    armory["members"].each do |member|
+      if member["character"]["level"] > 10 then
+        Resque.enqueue(CharacterJob, region, realm, member["character"]["name"]) 
       end
     end
     
@@ -25,7 +25,7 @@ class GuildJob
   end
   
   def self.from_armory(region, realm, name)
-    WowCommunityApi::BattleNet.region = WowCommunityApi::Regions::const_get(region.upcase)
-    WowCommunityApi::Guild.find_by_realm_and_name(realm, name, :members)
+    Battlenet::API.set_option(:region, region.downcase.to_sym)
+    Battlenet::API::Guild.profile(name, realm, ["members"])
   end
 end

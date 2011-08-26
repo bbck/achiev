@@ -1,3 +1,10 @@
+GIT
+  remote: git://github.com/MrMarvin/battlenet.git
+  revision: 88b69a58d3147c84a5ae3f18981a16c6815a0427
+  specs:
+    battlenet (0.1.1)
+      ruby-hmac
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -43,16 +50,12 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.1.2)
-    crack (0.1.8)
     diff-lcs (1.1.2)
     erubis (2.7.0)
     execjs (1.2.4)
       multi_json (~> 1.0)
-    hash-to-ostruct (0.0.1)
     highline (1.6.2)
     hike (1.2.1)
-    httparty (0.7.8)
-      crack (= 0.1.8)
     i18n (0.6.0)
     jquery-rails (1.0.13)
       railties (~> 3.0)
@@ -123,6 +126,7 @@ GEM
       activesupport (~> 3.0)
       railties (~> 3.0)
       rspec (~> 2.6.0)
+    ruby-hmac (0.4.0)
     sass (3.1.7)
     sass-rails (3.1.0.rc.6)
       actionpack (~> 3.1.0.rc6)
@@ -150,16 +154,12 @@ GEM
       raindrops (~> 0.6)
     vegas (0.1.8)
       rack (>= 1.0.0)
-    wow_community_api (0.2.1)
-      activesupport
-      hash-to-ostruct
-      httparty
-      i18n
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
+  battlenet!
   capistrano
   coffee-script
   jquery-rails
@@ -171,4 +171,3 @@ DEPENDENCIES
   sass-rails
   uglifier
   unicorn
-  wow_community_api
