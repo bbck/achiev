@@ -1,10 +1,10 @@
 <% page ||= 1 %>
 <tr>
   <td><%= character_counter + 1 + ((page.to_i - 1) * 25)%></td>
-  <td><%= character.name %></td>
+  <td><span class="class<%= character.class_id %>"><%= character.name %></span></td>
   <td><%= character.realm %></td>
   <td><%= character.guild.name if character.guild  %></td>
-  <td><%= character.faction_id == 1 ? 'Horde' : 'Alliance' %></td>
+  <td><span class="side<%= character.faction_id %>"><%= character.faction_id == 1 ? 'Horde' : 'Alliance' %></span></td>
   <td><%= character.achievement_points %></td>
   <td><%= time_ago_in_words character.fetched_at %> </td>
 </tr>
