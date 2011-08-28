@@ -10,13 +10,13 @@
 .side1 { color: #b30000; } /* Horde */
 
 /* Character Classes */
-.class1 { color: #8D4000; font-weight: bold; } /* warrior */
-.class2 { color: #DE80AB; font-weight: bold; } /* paladin */
-.class3 { color: #aad372; font-weight: bold; } /* hunter */
-.class4 { color: #FFDC1E; font-weight: bold; } /* rogue */
-.class5 { /*color: #898784;*/ font-weight: bold; } /* prist */
-.class6 { color: #c41e3b; font-weight: bold; } /* death knight */
-.class7 { color: #2359ff; font-weight: bold; } /* shaman */
-.class8 { color: #68ccef; font-weight: bold; } /* mage */
-.class9 { color: #9382c9; font-weight: bold; } /* warlock */
-.class11 { color: #ff7c0a; font-weight: bold; } /* druid */
+.class1 a { color: #8D4000; font-weight: bold; text-decoration: none; } /* warrior */
+.class2 a { color: #DE80AB; font-weight: bold; text-decoration: none; } /* paladin */
+.class3 a { color: #aad372; font-weight: bold; text-decoration: none; } /* hunter */
+.class4 a { color: #FFDC1E; font-weight: bold; text-decoration: none; } /* rogue */
+.class5 a { color: #898784; font-weight: bold; text-decoration: none; } /* prist */
+.class6 a { color: #c41e3b; font-weight: bold; text-decoration: none; } /* death knight */
+.class7 a { color: #2359ff; font-weight: bold; text-decoration: none; } /* shaman */
+.class8 a { color: #68ccef; font-weight: bold; text-decoration: none; } /* mage */
+.class9 a { color: #9382c9; font-weight: bold; text-decoration: none; } /* warlock */
+.class11 a { color: #ff7c0a; font-weight: bold; text-decoration: none; } /* druid */
