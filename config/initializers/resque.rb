@@ -1,1 +1,1 @@
-Resque.redis = ENV["REDISTOGO_URL"]
+Resque.redis = APP_CONFIG["redis"]
