@@ -8,6 +8,6 @@
     <th>Points</th>
     <th>Updated</th>
   </tr>
-  <%= render @members, :page => params[:page] %>
+  <%= render :partial => "member", :collection => @members, :locals => { :page => params[:page], :guild => @guild } %>
 </table>
 <%= paginate @members %>

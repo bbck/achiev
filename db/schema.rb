@@ -1,3 +1,4 @@
+# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -10,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110602031732) do
+ActiveRecord::Schema.define(:version => 20110904195815) do
 
   create_table "characters", :force => true do |t|
     t.string   "region",             :limit => 2,  :null => false
@@ -43,6 +44,7 @@ ActiveRecord::Schema.define(:version => 20110602031732) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.datetime "fetched_at"
+    t.integer  "characters_count"
   end
 
   add_index "guilds", ["region", "realm", "name"], :name => "index_guilds_on_region_and_realm_and_name", :unique => true

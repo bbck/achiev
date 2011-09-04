@@ -1,9 +1,0 @@
-<% page ||= 1 %>
-<tr>
-  <td class="rank"><%= character_counter + 1 + ((page.to_i - 1) * 25)%></td>
-  <td class="class"><span class="class<%= character.class_id %>"><%= link_to character.name, "http://#{character.region}.battle.net/wow/en/character/#{character.realm.parameterize ''}/#{character.name}/" %></span></td>
-  <td class="realm"><%= link_to "#{character.region.upcase}-#{character.realm}", characters_realm_path(character.region, character.realm) %></td>
-  <td class="guild"><%= link_to_unless(character.guild.nil?, character.guild.name, guild_path(character.guild.region, character.guild.realm, character.guild.name)) %></td>
-  <td class="points"><%= character.achievement_points %></td>
-  <td class="updated"><%= time_ago_in_words character.fetched_at %> </td>
-</tr>
