@@ -6,7 +6,7 @@ class CharactersController < ApplicationController
     when params[:region]
       @characters = Character.where(:region => params[:region]).page params[:page]
     else
-      @characters = Character.all.page params[:page]
+      @characters = Character.page params[:page]
     end
   end
   
