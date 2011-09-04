@@ -8,6 +8,7 @@ gem 'resque'
 gem 'unicorn'
 gem 'capistrano'
 gem 'kaminari'
+gem 'redis-store'
 
 group :assets do
   gem 'sass-rails', "  ~> 3.1.0"

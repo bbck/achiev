@@ -111,6 +111,9 @@ GEM
     redis (2.2.2)
     redis-namespace (1.0.3)
       redis (< 3.0.0)
+    redis-store (1.0.0)
+      redis (>= 2.0.0)
+      redis (~> 2.2.1)
     resque (1.18.6)
       multi_json (~> 1.0)
       redis-namespace (~> 1.0.2)
@@ -169,6 +172,7 @@ DEPENDENCIES
   kaminari
   mysql2
   rails (= 3.1.0)
+  redis-store
   resque
   rspec-rails
   sass-rails (~> 3.1.0)
