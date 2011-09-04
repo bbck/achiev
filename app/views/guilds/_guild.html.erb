@@ -1,0 +1,9 @@
+<% page ||= 1 %>
+<tr>
+  <td class="rank"><%= guild_counter + 1 + ((page.to_i - 1) * 25)%></td>
+  <td class="name"><span class="side<%= guild.faction_id %>"><%= link_to guild.name, guild_path(guild.region, guild.realm, guild.name) %></span></td>
+  <td class="realm"><%= link_to "#{guild.region.upcase}-#{guild.realm}", guilds_realm_path(guild.region, guild.realm) %></td>
+  <td class="members"><%= guild.characters.count %></td>
+  <td class="points"><%= guild.achievement_points %></td>
+  <td class="updated"><%= time_ago_in_words guild.fetched_at %> </td>
+</tr>

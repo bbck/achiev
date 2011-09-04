@@ -1,0 +1,13 @@
+<table class="common-table zebra-striped">
+  <tr>
+    <th>#</th>
+    <th>Name</th>
+    <th>Realm</th>
+    <th>Guild</th>
+    <th>Faction</th>
+    <th>Points</th>
+    <th>Updated</th>
+  </tr>
+  <%= render @members, :page => params[:page] %>
+</table>
+<%= paginate @members %>
