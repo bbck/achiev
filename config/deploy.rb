@@ -40,4 +40,4 @@ namespace :deploy do
   end
 end
 
-after "deploy:update_code", "deploy:configs"
+after "deploy:finalize_update", "deploy:configs"
