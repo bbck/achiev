@@ -2,9 +2,9 @@
  *= require_self
  *= require_tree . 
 */
-.content {
-  margin-top: 60px;
-}
+.content { padding-top: 60px; }
+td.realm a, td.guild a { color: inherit; text-decoration: none; }
+
 /* Faction */
 .side0 { color: #0078ff; } /* Alliance */
 .side1 { color: #b30000; } /* Horde */

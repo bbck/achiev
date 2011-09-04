@@ -1,10 +1,10 @@
 <% page ||= 1 %>
 <tr>
-  <td><%= character_counter + 1 + ((page.to_i - 1) * 25)%></td>
-  <td><span class="class<%= character.class_id %>"><%= link_to character.name, "http://us.battle.net/wow/en/character/#{character.realm.parameterize ''}/#{character.name}/" %></span></td>
-  <td><%= character.realm %></td>
-  <td><%= character.guild.name if character.guild  %></td>
-  <td><span class="side<%= character.faction_id %>"><%= character.faction_id == 1 ? 'Horde' : 'Alliance' %></span></td>
-  <td><%= character.achievement_points %></td>
-  <td><%= time_ago_in_words character.fetched_at %> </td>
+  <td class="rank"><%= character_counter + 1 + ((page.to_i - 1) * 25)%></td>
+  <td class="class"><span class="class<%= character.class_id %>"><%= link_to character.name, "http://#{character.region}.battle.net/wow/en/character/#{character.realm.parameterize ''}/#{character.name}/" %></span></td>
+  <td class="realm"><%= link_to "#{character.region.upcase}-#{character.realm}", characters_realm_path(character.region, character.realm) %></td>
+  <td class="guild"><%= character.guild.name if character.guild  %></td>
+  <td class="faction"><span class="side<%= character.faction_id %>"><%= character.faction_id == 1 ? 'Horde' : 'Alliance' %></span></td>
+  <td class="points"><%= character.achievement_points %></td>
+  <td class="updated"><%= time_ago_in_words character.fetched_at %> </td>
 </tr>
