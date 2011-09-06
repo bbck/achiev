@@ -1,6 +1,5 @@
 $:.unshift(File.expand_path('./lib', ENV['rvm_path']))
 require "bundler/capistrano"
-require "rvm/capistrano"
 
 set :application, "achiev"
 set :repository,  "git@github.com:bbck/achiev.git"
@@ -14,6 +13,7 @@ set :rvm_type,    :user
 set :unicorn_pid, "#{shared_path}/pids/unicorn.pid"
 
 ssh_options[:forward_agent] = true
+default_environment["PATH"] = "/home/achiev/.rbenv/shims:/home/achiev/.rbenv/bin:/usr/local/bin:/usr/bin:/bin:/usr/"
 
 server "achiev.bbck.net", :app, :web, :db
 
