@@ -1,4 +1,3 @@
-$:.unshift(File.expand_path('./lib', ENV['rvm_path']))
 require "bundler/capistrano"
 
 set :application, "achiev"
@@ -34,9 +33,15 @@ namespace :deploy do
     run "kill -s QUIT `cat #{unicorn_pid}`"
   end
   
+  desc "Reload unicorn"
+  task :reload do
+    run "kill -s USR2 `cat #{unicorn_pid}`"
+  end
+  
   desc "Restart unicorn"
   task :restart do
-    run "kill -s USR2 `cat #{unicorn_pid}`"
+    stop
+    start
   end
 end
 
