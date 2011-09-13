@@ -11,15 +11,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110904212139) do
+ActiveRecord::Schema.define(:version => 20110913214656) do
 
   create_table "characters", :force => true do |t|
-    t.string   "region",             :limit => 2,  :null => false
-    t.string   "realm",                            :null => false
-    t.string   "name",               :limit => 12, :null => false
+    t.string   "region",             :limit => 2,                 :null => false
+    t.string   "realm",                                           :null => false
+    t.string   "name",               :limit => 12,                :null => false
     t.string   "battlegroup"
     t.integer  "guild_id"
-    t.integer  "achievement_points"
+    t.integer  "achievement_points",               :default => 0
     t.integer  "level"
     t.integer  "title_id"
     t.integer  "faction_id"
@@ -35,17 +35,17 @@ ActiveRecord::Schema.define(:version => 20110904212139) do
   add_index "characters", ["region", "realm", "name"], :name => "index_characters_on_region_and_realm_and_name", :unique => true
 
   create_table "guilds", :force => true do |t|
-    t.string   "region",             :limit => 2,  :null => false
-    t.string   "realm",                            :null => false
-    t.string   "name",               :limit => 24, :null => false
+    t.string   "region",             :limit => 2,                 :null => false
+    t.string   "realm",                                           :null => false
+    t.string   "name",               :limit => 24,                :null => false
     t.string   "battlegroup"
     t.integer  "level"
-    t.integer  "achievement_points"
+    t.integer  "achievement_points",               :default => 0
     t.integer  "faction_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.datetime "fetched_at"
-    t.integer  "characters_count"
+    t.integer  "characters_count",                 :default => 0
   end
 
   add_index "guilds", ["achievement_points"], :name => "index_guilds_on_achievement_points"
