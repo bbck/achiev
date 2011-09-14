@@ -1,0 +1,17 @@
+#!/usr/bin/env ruby
+require File.expand_path('../../config/environment',  __FILE__)
+
+failed = Resque::Failure.all(0, 1000)
+
+failed.each do |f|
+  region = f["payload"]["args"][0]
+  realm  = f["payload"]["args"][1]
+  name   = f["payload"]["args"][2]
+
+  if f["error"] =~ /404/ then
+    character = Character.find_by_region_and_realm_and_name(region, realm, name)
+    character.destroy unless character.nil?
+  end
+
+  Resque::Failure.remove(0)
+end
