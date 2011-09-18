@@ -1,14 +1,17 @@
 class CharacterJob
+  extend JobHelpers
+  extend FailedHooks
+  
   @queue = :character
   
   def self.perform(region, realm, name)
     character = Character.find_by_region_and_realm_and_name(region, realm, name)
     character ||= Character.new
     
-    return unless character.fetched_at == nil || self.needs_update?(character.fetched_at)
+    return unless character.fetched_at == nil || needs_update?(character.fetched_at)
     
     # Basic info
-    armory = self.from_armory(region, realm, name)
+    armory = character_from_armory(region, realm, name)
     
     character.region = region
     character.fetched_at = Time.now
@@ -42,15 +45,6 @@ class CharacterJob
     end
     
     character.save
-  end
-  
-  def self.from_armory(region, realm, name)
-    Battlenet::API.set_option(:region, region.downcase.to_sym)
-    Battlenet::API::Character.profile(name, realm, ["guild"])
-  end
-  
-  def self.needs_update?(timestamp)
-    timestamp < 3.days.ago
   end
   
   def self.faction_id(race)
