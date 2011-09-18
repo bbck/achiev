@@ -5,6 +5,8 @@
 */
 .content { padding-top: 60px; }
 td.realm a, td.guild a { color: inherit; text-decoration: none; }
+table.top10 { margin-bottom: 0px; }
+.top10 tbody tr td { padding: 5px; }
 
 /* Faction */
 .side0 { color: #0078ff; } /* Alliance */
