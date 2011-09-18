@@ -1,11 +1,16 @@
 class GuildJob
+  extend JobHelpers
+  extend FailedHooks
+  
   @queue = :guild
   
   def self.perform(region, realm, name)
     guild = Guild.find_by_region_and_realm_and_name(region, realm, name)
     guild ||= Guild.new
     
-    armory = self.from_armory(region, realm, name)
+    return unless guild.fetched_at == nil || needs_update?(guild.fetched_at)
+    
+    armory = guild_from_armory(region, realm, name)
     
     guild.region = region
     guild.fetched_at = Time.now
@@ -22,10 +27,5 @@ class GuildJob
     end
     
     guild.save
-  end
-  
-  def self.from_armory(region, realm, name)
-    Battlenet::API.set_option(:region, region.downcase.to_sym)
-    Battlenet::API::Guild.profile(name, realm, ["members"])
   end
 end
