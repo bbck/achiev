@@ -8,13 +8,14 @@ set :deploy_via,  :remote_cache
 set :use_sudo,    false
 set :user,        "achiev"
 set :deploy_to,   "/home/#{user}"
-set :rvm_type,    :user
 set :unicorn_pid, "#{shared_path}/pids/unicorn.pid"
+set :ssh_options, { :forward_agent => true }
 
-ssh_options[:forward_agent] = true
-default_environment["PATH"] = "/home/achiev/.rbenv/shims:/home/achiev/.rbenv/bin:/usr/local/bin:/usr/bin:/bin:/usr/"
+default_environment["PATH"] = "/home/achiev/.rbenv/shims:/home/achiev/.rbenv/bin:/usr/local/bin:/usr/bin:/bin"
 
-server "achiev.bbck.net", :app, :web, :db
+role :web, "achiev.bbck.net"
+role :app, "achiev.bbck.net"
+role :db,  "achiev.bbck.net", :primary => true
 
 namespace :deploy do
   desc "Symlink configuration files"
@@ -23,25 +24,19 @@ namespace :deploy do
     run "ln -nfs #{shared_path}/config/config.yml #{release_path}/config/config.yml"
   end
   
-  desc "Start unicorn"
-  task :start do
-    run "cd #{current_path} && bundle exec unicorn_rails -c #{current_path}/config/unicorn.rb -E #{rails_env} -D"
+  desc "Restart Unicorn"
+  task :restart, :except => { :no_release => true } do
+    run "kill -s USR2 `cat #{shared_path}/pids/unicorn.pid`"
   end
-  
-  desc "Stop unicorn"
-  task :stop do
-    run "kill -s QUIT `cat #{unicorn_pid}`"
+
+  desc "Start Unicorn"
+  task :start, :except => { :no_release => true } do
+    run "cd #{current_path} ; bundle exec unicorn_rails -c #{release_path}/config/unicorn.rb -D"
   end
-  
-  desc "Reload unicorn"
-  task :reload do
-    run "kill -s USR2 `cat #{unicorn_pid}`"
-  end
-  
-  desc "Restart unicorn"
-  task :restart do
-    stop
-    start
+
+  desc "Stop Unicorn"
+  task :stop, :except => { :no_release => true } do
+    run "kill -s QUIT `cat #{shared_path}/pids/unicorn.pid`"
   end
 end
 
