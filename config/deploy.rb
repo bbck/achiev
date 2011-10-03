@@ -1,15 +1,17 @@
 require "bundler/capistrano"
+require "whenever/capistrano"
 
-set :application, "achiev"
-set :repository,  "git@github.com:bbck/achiev.git"
-set :scm,         :git
-set :branch,      "master"
-set :deploy_via,  :remote_cache
-set :use_sudo,    false
-set :user,        "achiev"
-set :deploy_to,   "/home/#{user}"
-set :unicorn_pid, "#{shared_path}/pids/unicorn.pid"
-set :ssh_options, { :forward_agent => true }
+set :application,      "achiev"
+set :repository,       "git@github.com:bbck/achiev.git"
+set :scm,              :git
+set :branch,           "master"
+set :deploy_via,       :remote_cache
+set :use_sudo,         false
+set :user,             "achiev"
+set :deploy_to,        "/home/#{user}"
+set :unicorn_pid,      "#{shared_path}/pids/unicorn.pid"
+set :ssh_options,      { :forward_agent => true }
+set :whenever_command, "bundle exec whenever"
 
 default_environment["PATH"] = "/home/achiev/.rbenv/shims:/home/achiev/.rbenv/bin:/usr/local/bin:/usr/bin:/bin"
 
