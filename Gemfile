@@ -9,6 +9,7 @@ gem 'unicorn'
 gem 'capistrano'
 gem 'kaminari'
 gem 'redis-store'
+gem 'newrelic_rpm'
 
 group :assets do
   gem 'sass-rails', "  ~> 3.1.0"
