@@ -35,6 +35,7 @@ class CharacterJob
         guild.faction_id  = self.faction_id(armory["race"])
         guild.level       = armory["guild"]["level"]
         guild.achievement_points = armory["guild"]["achievementPoints"]
+        guild.fetched_at  = Time.at(0)
         guild.save
         
         Resque.enqueue(GuildJob, region, realm, armory["guild"]["name"])
