@@ -1,4 +1,4 @@
-#!/usr/bin/env ruby
+#!/usr/bin/env ruby-local-exec
 require File.expand_path('../../config/environment',  __FILE__)
 
 REGIONS = [:us, :eu, :kr]
