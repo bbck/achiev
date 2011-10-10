@@ -1,5 +1,13 @@
 require 'spec_helper'
 
 describe Character do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it "should require a region, realm, and name" do
+    character = Character.new(region: "", realm: "", name: "")
+    character.should_not be_valid
+  end
+  
+  it "should require a supported region" do
+    character = Character.new(region: "uk", realm: "Kil'jaeden", name: "Thehermit")
+    character.should_not be_valid
+  end
 end
