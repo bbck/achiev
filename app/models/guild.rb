@@ -5,5 +5,5 @@ class Guild < ActiveRecord::Base
   scope :rank, select("*, row_number() OVER (ORDER BY achievement_points DESC) AS rank")
   
   validates :region, :realm, :name, :presence => true
-  validates :region, :inclusion => { :in => %w(us, eu, kr, tw)}
+  validates :region, :inclusion => { :in => %w(us eu kr tw)}
 end
