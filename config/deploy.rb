@@ -34,7 +34,7 @@ namespace :deploy do
 
   desc "Start Unicorn"
   task :start, :except => { :no_release => true } do
-    run "cd #{current_path} ; bundle exec unicorn_rails -c #{shared_path}/config/unicorn.rb -D"
+    run "cd #{current_path} ; bundle exec unicorn_rails -c #{release_path}/config/unicorn.rb -D"
   end
 
   desc "Stop Unicorn"
