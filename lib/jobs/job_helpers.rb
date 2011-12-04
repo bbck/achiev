@@ -1,12 +1,12 @@
 module JobHelpers
   def character_from_armory(region, realm, name)
-    Battlenet::API.set_option(:region, region.downcase.to_sym)
-    Battlenet::API::Character.profile(name, realm, ["guild"])
+    armory = Battlenet.new(region.downcase.to_sym)
+    armory.character(realm, name, :fields => "guild")
   end
   
   def guild_from_armory(region, realm, name)
-    Battlenet::API.set_option(:region, region.downcase.to_sym)
-    Battlenet::API::Guild.profile(name, realm, ["members"])
+    armory = Battlenet.new(region.downcase.to_sym)
+    armory.guild(realm, name, :fields => "members")
   end
   
   def needs_update?(timestamp)
