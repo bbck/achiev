@@ -1,6 +1,6 @@
 <tr>
   <td class="rank"><%= character_counter + 1 %></td>
-  <td class="name"><span class="class<%= character.class_id %>"><%= link_to character.name, "http://#{character.region}.battle.net/wow/en/character/#{character.realm.parameterize ''}/#{character.name}/" %></span></td>
+  <td class="name"><span class="class<%= character.class_id %>" data-darktip="character:<%= character.region %>.<%= character.realm.parameterize '' %>.<%= character.name.downcase %>(en)"><%= link_to character.name, "http://#{character.region}.battle.net/wow/en/character/#{character.realm.parameterize ''}/#{character.name}/" %></span></td>
   <td class="realm"><%= link_to "#{character.region.upcase}-#{character.realm}", characters_realm_path(character.region, character.realm) %></td>
   <td class="points"><%= character.achievement_points %></td>
 </tr>

@@ -1,6 +1,6 @@
 <tr>
   <td class="rank"><%= member.rank %></td>
-  <td class="class"><span class="class<%= member.class_id %>"><%= link_to member.name, "http://#{member.region}.battle.net/wow/en/character/#{member.realm.parameterize ''}/#{member.name}/" %></span></td>
+  <td class="class"><span class="class<%= member.class_id %>" data-darktip="character:<%= member.region %>.<%= member.realm.parameterize '' %>.<%= member.name.downcase %>(en)"><%= link_to member.name, "http://#{member.region}.battle.net/wow/en/character/#{member.realm.parameterize ''}/#{member.name}/" %></span></td>
   <td class="realm"><%= link_to "#{member.region.upcase}-#{member.realm}", characters_realm_path(member.region, member.realm) %></td>
   <td class="guild"><%= link_to guild.name, guild_path(guild.region, guild.realm, guild.name) %></td>
   <td class="faction"><span class="side<%= member.faction_id %>"><%= member.faction_id == 1 ? 'Horde' : 'Alliance' %></span></td>

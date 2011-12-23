@@ -1,0 +1,22 @@
+//= require jquery
+//= require jquery_ujs
+//= require bootstrap-tabs
+//= require_tree .
+//= require darktip
+
+$(function() {
+  $('.tabs').tabs()
+})
+
+window.___DarkTipSettings = {
+  'resources': {
+    'qtip2'  : [
+      '<%= asset_path "jquery.qtip.min.js" %>',
+      '<%= asset_path "jquery.qtip.min.css" %>'
+    ],
+    'extras': [
+      '<%= asset_path "darktip-wow.css" %>',
+      '<%= asset_path "darktip-wow.js" %>'
+    ]
+  }
+};
