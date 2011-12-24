@@ -1,6 +1,6 @@
 <tr>
   <td class="rank"><%= guild.rank %></td>
-  <td class="name"><span class="side<%= guild.faction_id %>" data-darktip="guild:<%= guild.region %>.<%= guild.realm.parameterize '' %>.<%= guild.name.downcase %>(en)"><%= link_to guild.name, guild_path(guild.region, guild.realm, guild.name) %></span></td>
+  <td class="name"><span class="side<%= guild.faction_id %>" data-darktip="guild:<%= guild.region %>.<%= blizzardize guild.realm %>.<%= guild.name.downcase %>(en)"><%= link_to guild.name, guild_path(guild.region, guild.realm, guild.name) %></span></td>
   <td class="realm"><%= link_to "#{guild.region.upcase}-#{guild.realm}", guilds_realm_path(guild.region, guild.realm) %></td>
   <td class="members"><%= guild.characters.size %></td>
   <td class="points"><%= guild.achievement_points %></td>
