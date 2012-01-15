@@ -10,7 +10,6 @@ gem 'capistrano'
 gem 'kaminari'
 gem 'redis-store'
 gem 'whenever', :require => false
-gem 'newrelic_rpm'
 
 group :assets do
   gem 'sass-rails', "  ~> 3.1.0"
