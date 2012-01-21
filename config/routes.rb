@@ -1,4 +1,5 @@
 Achiev::Application.routes.draw do
+  resources :characters, :only => [:create]
 
   match "/characters/:region/:realm/:name" => "characters#show", :as => :character
   match "/characters/:region/:realm" => "characters#index", :as => :characters_realm

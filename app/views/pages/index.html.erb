@@ -48,5 +48,28 @@
         <h3><%= link_to " See More...", guilds_all_path %></h2>
       </div>
     </div>
+    <div id="addchar">
+      <div id="addchar-alert" class="alert-message success hide fade in" data-alert="alert">
+        <a class="close" href="#">×</a>
+        <p>Character successfuly queued.</p>
+      </div>
+      <div id="addchar-fail" class="alert-message error hide fade in" data-alert="alert">
+        <a class="close" href="#">×</a>
+        <p>Problem trying to queue character.</p>
+      </div>
+      
+      <h2>Add Character</h2>
+      <%= form_tag "/characters", :remote => true, :method => :post, :class => "form-stacked" do %>
+      <fieldset>
+      <%= label_tag "region", "Region" %>
+      <%= select_tag "region", "<option>us</option><option>eu</option><option>kr</option><option>tw</option><option>cn</option>".html_safe, :class => "span2" %>
+      <%= label_tag "realm", "Realm" %>
+      <%= text_field_tag "realm", nil, :class => "span4" %>
+      <%= label_tag "name", "Name" %>
+      <%= text_field_tag "name", nil, :class => "span4" %>
+      </fieldset>
+      <%= submit_tag "Submit", :class => "btn primary" %>
+      <% end %>
+    </div>
   </div>
 </div>
