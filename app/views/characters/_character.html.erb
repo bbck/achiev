@@ -1,7 +1,7 @@
 <tr>
   <td class="rank"><%= character.rank %></td>
   <td class="name"><span class="class<%= character.class_id %>" data-darktip="character:<%= character.region %>.<%= blizzardize character.realm %>.<%= character.name.downcase %>(en)"><%= link_to character.name, "http://#{character.region}.battle.net/wow/en/character/#{blizzardize character.realm}/#{character.name.downcase}/" %></span></td>
-  <td class="realm"><%= link_to "#{character.region.upcase}-#{character.realm}", characters_realm_path(character.region, character.realm) %></td>
+  <td class="realm"><%= link_to "#{character.region.upcase}-#{character.realm}", characters_path(character.region, character.realm) %></td>
   <td class="guild"><%= link_to character.guild.name, guild_path(character.guild.region, character.guild.realm, character.guild.name) unless character.guild.nil? %></td>
   <td class="faction"><span class="side<%= character.faction_id %>"><%= character.faction_id == 1 ? 'Horde' : 'Alliance' %></span></td>
   <td class="points"><%= character.achievement_points %></td>

@@ -33,7 +33,7 @@
           </tr>
           <%= render :partial => "character", :collection => @characters %>
         </table>
-        <h3><%= link_to " See More...", characters_all_path %></h2>
+        <h3><%= link_to " See More...", characters_path %></h2>
       </div>
       <div id="guilds">
         <table class="zebra-striped top10">
@@ -45,7 +45,7 @@
           </tr>
           <%= render :partial => "guild", :collection => @guilds %>
         </table>
-        <h3><%= link_to " See More...", guilds_all_path %></h2>
+        <h3><%= link_to " See More...", guilds_path %></h2>
       </div>
     </div>
     <div id="addchar">
@@ -59,7 +59,7 @@
       </div>
       
       <h2>Add Character</h2>
-      <%= form_tag "/characters", :remote => true, :method => :post, :class => "form-stacked" do %>
+      <%= form_tag characters_path, :remote => true, :method => :post, :class => "form-stacked" do %>
       <fieldset>
       <%= label_tag "region", "Region" %>
       <%= select_tag "region", "<option>us</option><option>eu</option><option>kr</option><option>tw</option><option>cn</option>".html_safe, :class => "span2" %>
