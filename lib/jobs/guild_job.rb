@@ -20,12 +20,27 @@ class GuildJob
     guild.level = armory["level"]
     guild.achievement_points = armory["achievementPoints"]
     
+    guild.save
+    
     armory["members"].each do |member|
       if member["character"]["level"] > 10 then
-        Resque.enqueue(CharacterJob, region, realm, member["character"]["name"]) 
+        character = Character.find_by_region_and_realm_and_name(region, realm, member["character"]["name"])
+        character ||= Character.new
+        
+        character.region = region
+        character.fetched_at = Time.now
+        character.name = member["character"]["name"]
+        character.realm = armory["realm"]
+        character.race_id = member["character"]["race"]
+        character.class_id = member["character"]["class"]
+        character.gender_id = member["character"]["gender"]
+        character.faction_id = faction_id(member["character"]["race"])
+        character.level = member["character"]["level"]
+        character.achievement_points = member["character"]["achievementPoints"]
+        character.guild = guild
+        
+        character.save
       end
     end
-    
-    guild.save
   end
 end

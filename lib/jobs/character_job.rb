@@ -20,7 +20,7 @@ class CharacterJob
     character.race_id = armory["race"]
     character.class_id = armory["class"]
     character.gender_id = armory["gender"]
-    character.faction_id = self.faction_id(armory["race"])
+    character.faction_id = action_id(armory["race"])
     character.level = armory["level"]
     character.achievement_points = armory["achievementPoints"]
     
@@ -32,7 +32,7 @@ class CharacterJob
         guild.region      = region
         guild.realm       = armory["realm"]
         guild.name        = armory["guild"]["name"]
-        guild.faction_id  = self.faction_id(armory["race"])
+        guild.faction_id  = faction_id(armory["race"])
         guild.level       = armory["guild"]["level"]
         guild.achievement_points = armory["guild"]["achievementPoints"]
         guild.fetched_at  = Time.at(0)
@@ -46,9 +46,5 @@ class CharacterJob
     end
     
     character.save
-  end
-  
-  def self.faction_id(race)
-    [1,3,4,7,11,22].include?(race) ? 0 : 1
   end
 end
