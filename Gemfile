@@ -1,14 +1,14 @@
-source 'http://rubygems.org'
+source 'https://rubygems.org'
 
-gem 'rails', '3.2.0'
+gem 'rails', '3.2.5'
 gem 'pg'
 gem 'jquery-rails'
-gem 'battlenet', :git => 'git://github.com/bbck/battlenet.git', :branch => 'exception-class'
+gem 'battlenet'
 gem 'resque'
 gem 'unicorn'
 gem 'capistrano'
 gem 'kaminari'
-gem 'redis-store'
+gem 'redis-rails'
 gem 'whenever', :require => false
 
 group :assets do
