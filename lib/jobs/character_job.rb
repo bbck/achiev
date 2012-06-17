@@ -20,7 +20,7 @@ class CharacterJob
     character.race_id = armory["race"]
     character.class_id = armory["class"]
     character.gender_id = armory["gender"]
-    character.faction_id = action_id(armory["race"])
+    character.faction_id = faction_id(armory["race"])
     character.level = armory["level"]
     character.achievement_points = armory["achievementPoints"]
     
